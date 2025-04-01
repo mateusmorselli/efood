@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import estrela from '../../assets/images/estrela.png'
 import Tag from '../Tag'
 import { Card, Description, Titulo, SaibaMais, Infos } from './styles'
@@ -28,9 +29,11 @@ export const Product = ({ title, description, infos, image, rate }: Props) => (
     </Titulo>
     <Description>{description}</Description>
     <SaibaMais>
-      <Tag page="home" estilo="btn">
-        Saiba mais
-      </Tag>
+      <Link to="/perfil">
+        <Tag page="home" estilo="btn">
+          Saiba mais
+        </Tag>
+      </Link>
     </SaibaMais>
   </Card>
 )
