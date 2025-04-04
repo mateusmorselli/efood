@@ -14,4 +14,8 @@ export const TagContainer = styled.a<Props>`
     props.page === 'home' ? cores.laranja : cores.bgGeral};
   color: ${(props) => (props.page === 'home' ? cores.bgGeral : cores.laranja)};
   display: ${(props) => (props.page === 'home' ? 'inline-block' : 'block')};
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
 `

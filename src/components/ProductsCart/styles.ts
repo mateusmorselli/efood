@@ -2,12 +2,16 @@ import styled from 'styled-components'
 import { cores } from '../../styles'
 
 export const Card = styled.div`
+  cursor: pointer;
   background-color: ${cores.laranja};
   width: 320px;
   border: 1px solid ${cores.laranja};
   img {
     padding: 8px;
     width: 100%;
+    height: 167px;
+    width: 304px;
+    object-fit: cover;
   }
 `
 

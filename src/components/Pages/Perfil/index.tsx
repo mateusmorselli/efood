@@ -1,59 +1,47 @@
+import { useParams } from 'react-router-dom'
 import { Banner } from '../../Banner'
 import { Header } from '../../Header'
+import { CardapioRestaurante } from '../../Cardapio'
 
-import pizza from '../../../assets/images/pizza.png'
-import Cart from '../../../models/Cart'
-import { ProducsListCart } from '../../ProductsListCart'
+import { useGetCardapioQuery } from '../../../services/api'
+import { Cart } from '../../Cart'
 
-export const produtosPerfil: Cart[] = [
-  {
-    id: 1,
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    image: pizza,
-    title: 'Pizza Marguerita'
-  },
-  {
-    id: 2,
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    image: pizza,
-    title: 'Pizza Marguerita'
-  },
-  {
-    id: 3,
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    image: pizza,
-    title: 'Pizza Marguerita'
-  },
-  {
-    id: 4,
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    image: pizza,
-    title: 'Pizza Marguerita'
-  },
-  {
-    id: 5,
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    image: pizza,
-    title: 'Pizza Marguerita'
-  },
-  {
-    id: 6,
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    image: pizza,
-    title: 'Pizza Marguerita'
+export type Prato = {
+  id: number
+  nome: string
+  preco: number
+  porcao: string
+  descricao: string
+  foto: string
+}
+
+export type Restaurante = {
+  id: number
+  titulo: string
+  destacado: boolean
+  tipo: string
+  avaliacao: number
+  descricao: string
+  capa: string
+  cardapio: Prato[]
+}
+
+export const Perfil = () => {
+  const { id } = useParams()
+
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const { data: pratos } = useGetCardapioQuery(id!)
+
+  if (!pratos) {
+    return <h3>Carregando...</h3>
   }
-]
 
-export const Perfil = () => (
-  <>
-    <Header />
-    <Banner />
-    <ProducsListCart cardapioPerfil={produtosPerfil} />
-  </>
-)
+  return (
+    <>
+      <Header />
+      <Banner />
+      <CardapioRestaurante cardapio={pratos} />
+      <Cart />
+    </>
+  )
+}

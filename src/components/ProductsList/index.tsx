@@ -1,26 +1,41 @@
+import { Restaurante } from '../Pages/Home'
 import { Product } from '../Product'
 import { Containter, List } from './styles'
-import Cardapio from '../../models/Cardapio'
 
 export type Props = {
-  cardapioHome: Cardapio[]
+  restaurante: Restaurante[]
 }
 
-export const ProducsList = ({ cardapioHome }: Props) => (
-  <Containter>
-    <div className="container">
-      <List>
-        {cardapioHome.map((cardapio) => (
-          <Product
-            key={cardapio.id}
-            description={cardapio.description}
-            image={cardapio.image}
-            infos={cardapio.infos}
-            rate={cardapio.rate}
-            title={cardapio.title}
-          />
-        ))}
-      </List>
-    </div>
-  </Containter>
-)
+export const ProducsList = ({ restaurante }: Props) => {
+  const getRestaurantTags = (restauran: Restaurante) => {
+    const tags = []
+
+    if (restauran.destacado) {
+      tags.push('Destaque da semana')
+    }
+
+    tags.push(restauran.tipo)
+
+    return tags
+  }
+
+  return (
+    <Containter>
+      <div className="container">
+        <List>
+          {restaurante.map((restaurant) => (
+            <Product
+              key={restaurant.id}
+              description={restaurant.descricao}
+              image={restaurant.capa}
+              infos={getRestaurantTags(restaurant)}
+              rate={restaurant.avaliacao}
+              title={restaurant.titulo}
+              id={restaurant.id}
+            />
+          ))}
+        </List>
+      </div>
+    </Containter>
+  )
+}

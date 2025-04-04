@@ -8,17 +8,25 @@ type Props = {
   image: string
 }
 
-export const ProductsCart = ({ title, description, image }: Props) => (
-  <Card>
-    <img src={image} alt="{title}" />
-    <Titulo>
-      <h2>{title}</h2>
-    </Titulo>
-    <Description>{description}</Description>
-    <SaibaMais>
-      <Tag page="perfil" estilo="btn">
-        Adicionar ao carrinho
-      </Tag>
-    </SaibaMais>
-  </Card>
-)
+export const ProductsCart = ({ title, description, image }: Props) => {
+  const getDescricao = (descricao: string) => {
+    if (descricao.length > 250) {
+      return descricao.slice(0, 247) + '...'
+    }
+    return descricao
+  }
+  return (
+    <Card>
+      <img src={image} alt="{title}" />
+      <Titulo>
+        <h2>{title}</h2>
+      </Titulo>
+      <Description>{getDescricao(description)}</Description>
+      <SaibaMais>
+        <Tag page="perfil" estilo="btn">
+          Mais detalhes
+        </Tag>
+      </SaibaMais>
+    </Card>
+  )
+}
