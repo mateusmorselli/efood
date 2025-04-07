@@ -12,7 +12,7 @@ export const TagContainer = styled.a<Props>`
   font-weight: 700;
   margin-left: ${(props) => (props.estilo === 'tag' ? '8px' : '0px')};
   background-color: ${(props) =>
-    props.page === 'home' ? cores.laranja : cores.bgGeral};
+    props.page === 'home' ? cores.laranja : cores.rodapeBg};
   color: ${(props) => (props.page === 'home' ? cores.bgGeral : cores.laranja)};
   display: ${(props) => (props.page === 'home' ? 'inline-flex' : 'flex')};
   align-items: center;
