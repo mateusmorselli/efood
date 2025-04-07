@@ -79,7 +79,7 @@ export const ModalInfos = styled.div`
   }
 
   a {
-    background-color: ${cores.bgGeral};
+    background-color: ${cores.rodapeBg};
     color: ${cores.laranja};
     padding: 4px 7px;
     font-weight: 700;
