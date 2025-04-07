@@ -31,7 +31,7 @@ export const BannerDiv = styled.div`
     justify-content: space-between;
     padding: 24px 0;
     box-sizing: border-box;
-    z-index: 2;
+    z-index: 1;
     h1,
     p {
       color: ${cores.branco};

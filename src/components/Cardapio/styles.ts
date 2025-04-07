@@ -41,7 +41,7 @@ export const Modal = styled.div`
 export const ModalContent = styled.div`
   max-width: 1024px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   background-color: ${cores.laranja};
   display: flex;
   .food {
