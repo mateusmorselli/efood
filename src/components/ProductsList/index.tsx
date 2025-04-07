@@ -19,6 +19,13 @@ export const ProducsList = ({ restaurante }: Props) => {
     return tags
   }
 
+  const getDescricao = (descricao: string) => {
+    if (descricao.length > 250) {
+      return descricao.slice(0, 247) + '...'
+    }
+    return descricao
+  }
+
   return (
     <Containter>
       <div className="container">
@@ -26,7 +33,7 @@ export const ProducsList = ({ restaurante }: Props) => {
           {restaurante.map((restaurant) => (
             <Product
               key={restaurant.id}
-              description={restaurant.descricao}
+              description={getDescricao(restaurant.descricao)}
               image={restaurant.capa}
               infos={getRestaurantTags(restaurant)}
               rate={restaurant.avaliacao}

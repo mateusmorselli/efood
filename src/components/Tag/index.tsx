@@ -6,10 +6,16 @@ export type Props = {
   children: string
 }
 
-const Tag = ({ children, estilo = 'tag', page = 'home' }: Props) => (
-  <TagContainer page={page} estilo={estilo}>
-    {children}
-  </TagContainer>
-)
+const Tag = ({ children, estilo = 'tag', page = 'home' }: Props) => {
+  const textoformatado =
+    typeof children === 'string'
+      ? children.charAt(0).toUpperCase() + children.slice(1).toLowerCase()
+      : children
+  return (
+    <TagContainer page={page} estilo={estilo}>
+      {textoformatado}
+    </TagContainer>
+  )
+}
 
 export default Tag
