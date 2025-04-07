@@ -23,7 +23,7 @@ export const BannerDiv = styled.div`
 
   .text-container {
     position: absolute;
-    top: 24px;
+    top: -6px;
     left: calc((100% - 1024px) / 2);
     height: 100%;
     display: flex;
@@ -40,6 +40,7 @@ export const BannerDiv = styled.div`
       margin-bottom: 48px;
       font-size: 32px;
       font-weight: 900;
+      margin-bottom: -6px;
     }
     p {
       font-size: 32px;
