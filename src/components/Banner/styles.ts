@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { cores, breakPoints } from '../../styles'
 
 export const BannerDiv = styled.div`
   position: relative;
@@ -45,6 +45,52 @@ export const BannerDiv = styled.div`
     p {
       font-size: 32px;
       font-weight: 100;
+    }
+  }
+
+  @media (max-width: ${breakPoints.desktop}) {
+    .text-container {
+      left: 0;
+      padding: 24px;
+      width: 100%;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: ${breakPoints.tablet}) {
+    height: 240px;
+    img {
+      height: 240px;
+    }
+
+    .text-container {
+      padding: 16px;
+      h1 {
+        font-size: 24px;
+        margin-bottom: 16px;
+      }
+      p {
+        font-size: 24px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    height: 180px;
+    img {
+      height: 180px;
+    }
+
+    .text-container {
+      padding: 12px;
+      h1 {
+        font-size: 20px;
+        margin-bottom: 12px;
+      }
+      p {
+        font-size: 18px;
+      }
     }
   }
 `

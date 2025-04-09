@@ -27,7 +27,9 @@ export const Header = () => {
               <img src={logo} alt="Logo" />
             </Link>
           </LinkItem>
-          <CartButton onClick={openCart}>{items.length} Produto(s)</CartButton>
+          <CartButton onClick={openCart}>
+            {items.length} Produto(s) no carrinho
+          </CartButton>
         </Links>
       </nav>
     </HeaderDiv>

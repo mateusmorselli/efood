@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+
 import { ProductsCart } from '../ProductsCart'
-import { Containter, List, Modal, ModalContent, ModalInfos } from './styles'
-import close from '../../assets/images/close.png'
-import { Prato } from '../Pages/Perfil'
 import { add, open } from '../../store/reducers/cart'
+import { Prato } from '../Pages/Perfil'
+import { Containter, List, Modal, ModalContent, ModalInfos } from './styles'
+
+import close from '../../assets/images/close.png'
 
 export type Props = {
   cardapio: Prato[]
@@ -64,7 +66,7 @@ export const CardapioRestaurante = ({ cardapio }: Props) => {
             <ModalInfos>
               <h2>{pratoSelecionado.nome}</h2>
               <p>{pratoSelecionado.descricao}</p>
-              <p>Serve: de {pratoSelecionado.porcao}</p>
+              <span>Serve: {pratoSelecionado.porcao}</span>
               <a onClick={addToCart}>
                 Adicionar ao carrinho - {formataPreco(pratoSelecionado.preco)}
               </a>

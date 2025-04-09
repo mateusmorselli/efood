@@ -1,12 +1,14 @@
+import Loader from '../Loader'
 import { Restaurante } from '../Pages/Home'
 import { Product } from '../Product'
 import { Containter, List } from './styles'
 
 export type Props = {
   restaurante: Restaurante[]
+  isLoading: boolean
 }
 
-export const ProducsList = ({ restaurante }: Props) => {
+export const ProducsList = ({ restaurante, isLoading }: Props) => {
   const getRestaurantTags = (restauran: Restaurante) => {
     const tags = []
 
@@ -24,6 +26,10 @@ export const ProducsList = ({ restaurante }: Props) => {
       return descricao.slice(0, 247) + '...'
     }
     return descricao
+  }
+
+  if (isLoading) {
+    return <Loader />
   }
 
   return (

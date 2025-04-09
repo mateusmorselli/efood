@@ -2,6 +2,7 @@ import { Hero } from '../../Hero'
 import { ProducsList } from '../../ProductsList'
 import { Prato } from '../Perfil'
 import { useGetRestauranteQuery } from '../../../services/api'
+import Loader from '../../Loader'
 
 export type Restaurante = {
   id: number
@@ -15,17 +16,16 @@ export type Restaurante = {
 }
 
 export const Home = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data: restaurantes, isLoading } = useGetRestauranteQuery()
 
   if (!restaurantes) {
-    return <h3>Carregando...</h3>
+    return <Loader />
   }
 
   return (
     <>
       <Hero />
-      <ProducsList restaurante={restaurantes} />
+      <ProducsList isLoading={isLoading} restaurante={restaurantes} />
     </>
   )
 }

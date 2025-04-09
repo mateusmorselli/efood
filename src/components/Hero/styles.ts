@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { breakPoints } from '../../styles'
 
 export const HeroDiv = styled.header`
   padding: 40px 0px;
@@ -17,6 +18,10 @@ export const HeroDiv = styled.header`
     h1 {
       font-size: 36px;
       font-weight: 900;
+
+      @media (max-width: ${breakPoints.tablet}) {
+        font-size: 24px;
+      }
     }
   }
 `

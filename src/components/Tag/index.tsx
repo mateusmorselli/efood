@@ -4,6 +4,7 @@ export type Props = {
   page?: 'home' | 'perfil'
   estilo?: 'btn' | 'tag'
   children: string
+  onClick?: () => void
 }
 
 const Tag = ({ children, estilo = 'tag', page = 'home' }: Props) => {

@@ -1,10 +1,13 @@
 import { useParams } from 'react-router-dom'
-import { Banner } from '../../Banner'
 import { Header } from '../../Header'
 import { CardapioRestaurante } from '../../Cardapio'
-
-import { useGetCardapioQuery } from '../../../services/api'
+import {
+  useGetCardapioQuery,
+  useGetRestauranteByIdQuery
+} from '../../../services/api'
 import { Cart } from '../../Cart'
+import Loader from '../../Loader'
+import { Banner } from '../../Banner'
 
 export type Prato = {
   id: number
@@ -28,18 +31,17 @@ export type Restaurante = {
 
 export const Perfil = () => {
   const { id } = useParams()
-
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const { data: pratos } = useGetCardapioQuery(id!)
+  const { data: restaurante } = useGetRestauranteByIdQuery(id!)
 
-  if (!pratos) {
-    return <h3>Carregando...</h3>
+  if (!pratos || !restaurante) {
+    return <Loader />
   }
 
   return (
     <>
       <Header />
-      <Banner />
+      <Banner restaurante={restaurante} />
       <CardapioRestaurante cardapio={pratos} />
       <Cart />
     </>

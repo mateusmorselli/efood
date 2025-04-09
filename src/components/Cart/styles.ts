@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
-import { TagContainer } from '../Tag/styles'
 
 export const Overlay = styled.div`
   position: absolute;
@@ -34,6 +33,13 @@ export const SideBar = styled.aside`
   max-width: 360px;
   width: 100%;
 
+  .empty {
+    font-size: 16px;
+    color: ${cores.bgGeral};
+    line-height: 22px;
+    text-align: center;
+  }
+
   p {
     font-weight: 700;
     font-size: 14px;
@@ -41,15 +47,23 @@ export const SideBar = styled.aside`
     margin-top: 40px;
     margin-bottom: 16px;
   }
+`
 
-  ${TagContainer} {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 24px;
-    font-size: 14px;
-    font-weight: 700;
-  }
+export const Carrinho = styled.div``
+
+export const Checkout = styled.div``
+
+export const Payment = styled.div``
+
+export const Finish = styled.div``
+
+export const Button = styled.button`
+  border: none;
+  width: 100%;
+  height: 24px;
+  font-size: 14px;
+  font-weight: 700;
+  background-color: ${cores.rodapeBg};
 `
 
 export const CartItem = styled.li`
@@ -59,7 +73,7 @@ export const CartItem = styled.li`
   padding: 8px;
   gap: 8px;
   height: 100px;
-  background-color: ${cores.branco};
+  background-color: ${cores.rodapeBg};
   margin-bottom: 16px;
 
   .img-product {
@@ -84,7 +98,7 @@ export const ItemContainer = styled.div`
   h3 {
     font-size: 18px;
     font-weight: 700;
-    margin: 0;
+    margin-top: -24px;
   }
   span {
     font-size: 14px;
@@ -98,4 +112,60 @@ export const ItemContainer = styled.div`
     width: 16px;
     align-self: flex-end;
   }
+`
+
+export const ParagrafoValorTotal = styled.p`
+  display: flex;
+  justify-content: space-between;
+  span {
+    color: ${cores.rodapeBg};
+  }
+`
+export const ButtonsDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-top: 24px;
+`
+
+export const ButtonFinal = styled.button`
+  margin-bottom: 8px;
+  border: none;
+  background-color: ${cores.rodapeBg};
+  height: 24px;
+  font-size: 14px;
+  font-weight: 700;
+`
+
+export const InputGroup = styled.div`
+  label {
+    font-size: 14px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    display: block;
+    font-weight: 700;
+  }
+
+  input {
+    height: 32px;
+    background-color: ${cores.rodapeBg};
+    border: none;
+    width: 100%;
+
+    &.error {
+      border: 2px solid #ff0033;
+      box-shadow: 0 0 8px 2px #ff0033;
+      background-color: #ffe5e5;
+    }
+  }
+`
+export const Row = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+export const Paragrafo = styled.span`
+  line-height: 22px;
+  font-size: 14px;
+  font-weight: 400;
+  color: ${cores.rodapeBg};
 `
