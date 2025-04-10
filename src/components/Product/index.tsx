@@ -37,7 +37,10 @@ export const Product = ({
     </Titulo>
     <Description>{description}</Description>
     <SaibaMais>
-      <Link to={`/perfil/${id}`}>
+      <Link
+        to={`/perfil/${id}`}
+        title={`Clique para saber mais do restaurante ${title}`}
+      >
         <Tag page="home" estilo="btn">
           Saiba mais
         </Tag>

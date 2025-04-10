@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 
 export const Overlay = styled.div`
   position: absolute;
@@ -27,7 +27,7 @@ export const CartContainer = styled.div`
 `
 
 export const SideBar = styled.aside`
-  background-color: ${cores.laranja};
+  background-color: ${colors.orange};
   z-index: 1;
   padding: 32px 8px 0 8px;
   max-width: 360px;
@@ -35,7 +35,7 @@ export const SideBar = styled.aside`
 
   .empty {
     font-size: 16px;
-    color: ${cores.bgGeral};
+    color: ${colors.cream};
     line-height: 22px;
     text-align: center;
   }
@@ -43,7 +43,7 @@ export const SideBar = styled.aside`
   p {
     font-weight: 700;
     font-size: 14px;
-    color: ${cores.branco};
+    color: ${colors.white};
     margin-top: 40px;
     margin-bottom: 16px;
   }
@@ -63,7 +63,7 @@ export const Button = styled.button`
   height: 24px;
   font-size: 14px;
   font-weight: 700;
-  background-color: ${cores.rodapeBg};
+  background-color: ${colors.offwhite};
 `
 
 export const CartItem = styled.li`
@@ -73,7 +73,7 @@ export const CartItem = styled.li`
   padding: 8px;
   gap: 8px;
   height: 100px;
-  background-color: ${cores.rodapeBg};
+  background-color: ${colors.offwhite};
   margin-bottom: 16px;
 
   .img-product {
@@ -118,7 +118,7 @@ export const ParagrafoValorTotal = styled.p`
   display: flex;
   justify-content: space-between;
   span {
-    color: ${cores.rodapeBg};
+    color: ${colors.offwhite};
   }
 `
 export const ButtonsDiv = styled.div`
@@ -130,7 +130,7 @@ export const ButtonsDiv = styled.div`
 export const ButtonFinal = styled.button`
   margin-bottom: 8px;
   border: none;
-  background-color: ${cores.rodapeBg};
+  background-color: ${colors.offwhite};
   height: 24px;
   font-size: 14px;
   font-weight: 700;
@@ -147,9 +147,11 @@ export const InputGroup = styled.div`
 
   input {
     height: 32px;
-    background-color: ${cores.rodapeBg};
+    background-color: ${colors.offwhite};
     border: none;
     width: 100%;
+    color: #4b4b4b;
+    padding: 8px;
 
     &.error {
       border: 2px solid #ff0033;
@@ -167,5 +169,5 @@ export const Paragrafo = styled.span`
   line-height: 22px;
   font-size: 14px;
   font-weight: 400;
-  color: ${cores.rodapeBg};
+  color: ${colors.offwhite};
 `

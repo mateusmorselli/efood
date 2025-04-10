@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 
 export const Container = styled.div`
   h1,
   label {
-    color: ${cores.rodapeBg};
+    color: ${colors.offwhite};
   }
 
   h1 {
@@ -19,6 +19,6 @@ export const ContainerFinal = styled.div`
   gap: 32px;
 
   h1 {
-    color: ${cores.rodapeBg};
+    color: ${colors.offwhite};
   }
 `

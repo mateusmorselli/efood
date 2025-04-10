@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores, breakPoints } from '../../styles'
+import { colors, breakPoints } from '../../styles'
 
 export const BannerDiv = styled.div`
   position: relative;
@@ -34,7 +34,7 @@ export const BannerDiv = styled.div`
     z-index: 1;
     h1,
     p {
-      color: ${cores.branco};
+      color: ${colors.white};
     }
     h1 {
       margin-bottom: 48px;

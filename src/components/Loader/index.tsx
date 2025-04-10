@@ -1,10 +1,10 @@
 import { SquareLoader } from 'react-spinners'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 import { Container } from './styles'
 
 const Loader = () => (
   <Container>
-    <SquareLoader color={cores.laranja} />
+    <SquareLoader color={colors.orange} />
   </Container>
 )
 

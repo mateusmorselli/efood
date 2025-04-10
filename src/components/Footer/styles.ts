@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { cores, breakPoints } from '../../styles'
+import { colors, breakPoints } from '../../styles'
 
 export const FooterBg = styled.footer`
-  background-color: ${cores.rodapeBg};
+  background-color: ${colors.offwhite};
   padding: 40px 0;
 
   @media (max-width: ${breakPoints.tablet}) {

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 
 import { Props } from '.'
 
@@ -12,11 +12,12 @@ export const TagContainer = styled.button<Props>`
   font-weight: bold;
   margin-left: ${(props) => (props.estilo === 'tag' ? '8px' : '0px')};
   background-color: ${(props) =>
-    props.page === 'home' ? cores.laranja : cores.rodapeBg};
-  color: ${(props) => (props.page === 'home' ? cores.bgGeral : cores.laranja)};
+    props.page === 'home' ? colors.orange : colors.offwhite};
+  color: ${(props) => (props.page === 'home' ? colors.cream : colors.orange)};
   display: ${(props) => (props.page === 'home' ? 'inline-flex' : 'flex')};
   align-items: center;
   width: ${(props) => (props.page === 'home' ? '' : '100%')};
   justify-content: center;
   position: relative;
+  cursor: ${(props) => (props.estilo === 'tag' ? 'default' : 'pointer')};
 `

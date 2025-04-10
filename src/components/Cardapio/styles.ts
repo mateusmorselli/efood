@@ -1,9 +1,10 @@
 import styled from 'styled-components'
-import { breakPoints, cores } from '../../styles'
+import { breakPoints, colors } from '../../styles'
 
-export const Containter = styled.section`
+export const Container = styled.section`
   margin-top: 80px;
   margin-bottom: 120px;
+  background-color: ${colors.cream};
 
   @media (max-width: ${breakPoints.tablet}) {
     margin-top: 40px;
@@ -68,7 +69,7 @@ export const ModalContent = styled.div`
   max-width: 1024px;
   position: relative;
   z-index: 2;
-  background-color: ${cores.laranja};
+  background-color: ${colors.orange};
   display: flex;
 
   @media (max-width: ${breakPoints.tablet}) {
@@ -112,14 +113,14 @@ export const ModalInfos = styled.div`
   margin-left: -40px;
 
   @media (max-width: ${breakPoints.tablet}) {
-    padding: 24px 16px; /* Padding mais compacto */
-    margin-left: 0; /* Removo margem negativa */
+    padding: 24px 16px;
+    margin-left: 0;
   }
 
   h2,
   p,
   span {
-    color: ${cores.bgGeral};
+    color: ${colors.cream};
   }
 
   h2 {
@@ -146,8 +147,8 @@ export const ModalInfos = styled.div`
   }
 
   a {
-    background-color: ${cores.rodapeBg};
-    color: ${cores.laranja};
+    background-color: ${colors.offwhite};
+    color: ${colors.orange};
     padding: 4px 7px;
     font-weight: 700;
     font-size: 14px;

@@ -1,10 +1,10 @@
 import { createGlobalStyle } from 'styled-components'
 
-export const cores = {
-  branco: '#fff',
-  laranja: '#E66767',
-  rodapeBg: '#FFEBD9',
-  bgGeral: '#FFF8F2'
+export const colors = {
+  white: '#fff',
+  orange: '#E66767',
+  offwhite: '#FFEBD9',
+  cream: '#FFF8F2'
 }
 
 export const breakPoints = {
@@ -18,12 +18,12 @@ export const GlobalCss = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     font-family: Roboto, sans-seriff;
-    color: ${cores.laranja};
+    color: ${colors.orange};
     list-style: none;
   }
 
   body {
-    background-color: ${cores.bgGeral};
+    background-color: ${colors.cream};
   }
 
   .container {

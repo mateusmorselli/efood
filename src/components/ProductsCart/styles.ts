@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 
 export const Card = styled.div`
   cursor: pointer;
-  background-color: ${cores.laranja};
+  background-color: ${colors.orange};
   width: 320px;
   height: 338px;
   img {
@@ -21,7 +21,7 @@ export const Titulo = styled.div`
   font-weight: 900;
   line-height: 19px;
   h2 {
-    color: ${cores.bgGeral};
+    color: ${colors.cream};
     white-space: nowrap;
   }
 `
@@ -30,7 +30,7 @@ export const Description = styled.p`
   font-size: 14px;
   font-weight: 400;
   margin-bottom: 8px;
-  color: ${cores.bgGeral};
+  color: ${colors.cream};
   line-height: 22px;
 `
 

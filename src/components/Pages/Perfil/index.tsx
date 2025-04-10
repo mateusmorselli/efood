@@ -42,7 +42,7 @@ export const Perfil = () => {
     <>
       <Header />
       <Banner restaurante={restaurante} />
-      <CardapioRestaurante cardapio={pratos} />
+      <CardapioRestaurante menu={pratos} />
       <Cart />
     </>
   )

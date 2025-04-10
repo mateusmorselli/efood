@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { breakPoints, cores } from '../../styles'
+import { breakPoints, colors } from '../../styles'
 
 export const Card = styled.div`
-  background-color: ${cores.branco};
+  background-color: ${colors.white};
   width: 472px;
   height: 398px;
-  border: 1px solid ${cores.laranja};
+  border: 1px solid ${colors.orange};
   border-top: none;
   position: relative;
   box-sizing: border-box;
@@ -98,8 +98,8 @@ export const Infos = styled.div`
 `
 
 export const Conteudo = styled.div`
-  background-color: ${cores.branco};
-  border: 1px solid ${cores.laranja};
+  background-color: ${colors.white};
+  border: 1px solid ${colors.orange};
   border-top: none;
   padding: 0;
   position: relative;

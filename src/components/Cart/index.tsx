@@ -1,37 +1,22 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik'
+import InputMask from 'react-input-mask'
+import { useNavigate } from 'react-router-dom'
+import * as Yup from 'yup'
+
+import * as S from './styles'
 import { RootReducer } from '../../store'
-import {
-  Button,
-  ButtonFinal,
-  ButtonsDiv,
-  Carrinho,
-  CartContainer,
-  CartItem,
-  Checkout,
-  Finish,
-  InputGroup,
-  ItemContainer,
-  Overlay,
-  Paragrafo,
-  ParagrafoValorTotal,
-  Payment,
-  Row,
-  SideBar
-} from './styles'
+import { close, remove, clear } from '../../store/reducers/cart'
+import { formataPreco } from '../Cardapio'
+import { DadosCompra, DadosPagamento, PagamentoAprovado } from '../Card'
+import { usePurchaseMutation } from '../../services/api'
 
 import trash from '../../assets/images/trash.png'
 
-import { close, remove } from '../../store/reducers/cart'
-import { formataPreco } from '../Cardapio'
-import { DadosCompra, DadosPagamento, PagamentoAprovado } from '../Card'
-import * as Yup from 'yup'
-import { usePurchaseMutation } from '../../services/api'
-import { useNavigate } from 'react-router-dom'
-
 export const Cart = () => {
-  const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
+  const [purchase, { isLoading, isError, data, isSuccess }] =
+    usePurchaseMutation()
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
   const dispatch = useDispatch()
   const [step, setStep] = useState<'cart' | 'delivery' | 'payment' | 'finish'>(
@@ -86,7 +71,7 @@ export const Cart = () => {
         .required('O campo é obrigatório'),
       cardNum: Yup.string()
         .min(16, 'Precisa ter 16 dígitos')
-        .max(16, 'Precisa ter 16 dígitos')
+        .max(20, 'Precisa ter 16 dígitos')
         .required('O campo é obrigatório'),
       code: Yup.string()
         .min(3, 'Precisa ter 3 dígitos')
@@ -156,35 +141,43 @@ export const Cart = () => {
     return hasError
   }
 
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(clear())
+    }
+  }, [isSuccess, dispatch])
+
   return (
-    <CartContainer className={isOpen ? 'is-open' : ''}>
-      <Overlay onClick={closeCart} />
-      <SideBar>
+    <S.CartContainer className={isOpen ? 'is-open' : ''}>
+      <S.Overlay onClick={closeCart} />
+      <S.SideBar>
         {step === 'cart' && (
-          <Carrinho>
+          <S.Carrinho>
             {items.length > 0 ? (
               <>
                 <ul>
                   {items.map((item) => (
-                    <CartItem key={item.id}>
+                    <S.CartItem key={item.id}>
                       <img src={item.foto} className="img-product" />
-                      <ItemContainer>
+                      <S.ItemContainer>
                         <h3>{item.nome}</h3>
                         <span>{formataPreco(item.preco)}</span>
-                      </ItemContainer>
+                      </S.ItemContainer>
                       <img
                         src={trash}
                         className="trash-icon"
                         onClick={() => removeItem(item.id)}
                       />
-                    </CartItem>
+                    </S.CartItem>
                   ))}
                 </ul>
-                <ParagrafoValorTotal>
+                <S.ParagrafoValorTotal>
                   <span>Valor total:</span>
                   <span>{formataPreco(getTotalPrice())}</span>
-                </ParagrafoValorTotal>
-                <Button onClick={handleClick}>Continuar com a entrega</Button>
+                </S.ParagrafoValorTotal>
+                <S.Button onClick={handleClick}>
+                  Continuar com a entrega
+                </S.Button>
               </>
             ) : (
               <p className="empty">
@@ -192,16 +185,16 @@ export const Cart = () => {
                 adicione seus favoritos!
               </p>
             )}
-          </Carrinho>
+          </S.Carrinho>
         )}
 
-        <form onSubmit={form.handleSubmit}>
+        <form id="compra" onSubmit={form.handleSubmit}>
           {step === 'delivery' && (
-            <Checkout>
+            <S.Checkout>
               <DadosCompra>
                 <>
-                  <Row>
-                    <InputGroup>
+                  <S.Row>
+                    <S.InputGroup>
                       <label htmlFor="receiver">Quem irá receber</label>
                       <input
                         type="text"
@@ -214,10 +207,10 @@ export const Cart = () => {
                           checkInputHasError('receiver') ? 'error' : ''
                         }
                       />
-                    </InputGroup>
-                  </Row>
-                  <Row>
-                    <InputGroup>
+                    </S.InputGroup>
+                  </S.Row>
+                  <S.Row>
+                    <S.InputGroup>
                       <label htmlFor="description">Endereço</label>
                       <input
                         type="text"
@@ -230,10 +223,10 @@ export const Cart = () => {
                           checkInputHasError('description') ? 'error' : ''
                         }
                       />
-                    </InputGroup>
-                  </Row>
-                  <Row>
-                    <InputGroup>
+                    </S.InputGroup>
+                  </S.Row>
+                  <S.Row>
+                    <S.InputGroup>
                       <label htmlFor="city">Cidade</label>
                       <input
                         type="text"
@@ -244,18 +237,18 @@ export const Cart = () => {
                         onBlur={form.handleBlur}
                         className={checkInputHasError('city') ? 'error' : ''}
                       />
-                    </InputGroup>
-                  </Row>
-                  <Row
+                    </S.InputGroup>
+                  </S.Row>
+                  <S.Row
                     style={{
                       display: 'flex',
                       flexDirection: 'row',
                       gap: '34px'
                     }}
                   >
-                    <InputGroup>
+                    <S.InputGroup>
                       <label htmlFor="zipcode">CEP</label>
-                      <input
+                      <InputMask
                         type="text"
                         id="zipcode"
                         name="zipcode"
@@ -263,9 +256,10 @@ export const Cart = () => {
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                         className={checkInputHasError('zipcode') ? 'error' : ''}
+                        mask="99.999-999"
                       />
-                    </InputGroup>
-                    <InputGroup>
+                    </S.InputGroup>
+                    <S.InputGroup>
                       <label htmlFor="number">Número</label>
                       <input
                         type="text"
@@ -276,10 +270,10 @@ export const Cart = () => {
                         onBlur={form.handleBlur}
                         className={checkInputHasError('number') ? 'error' : ''}
                       />
-                    </InputGroup>
-                  </Row>
-                  <Row>
-                    <InputGroup>
+                    </S.InputGroup>
+                  </S.Row>
+                  <S.Row>
+                    <S.InputGroup>
                       <label htmlFor="complement">Complemento (opcional)</label>
                       <input
                         type="text"
@@ -289,31 +283,34 @@ export const Cart = () => {
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                       />
-                    </InputGroup>
-                  </Row>
-                  <ButtonsDiv>
-                    <ButtonFinal
+                    </S.InputGroup>
+                  </S.Row>
+                  <S.ButtonsDiv>
+                    <S.ButtonFinal
                       type="button"
                       onClick={() => setStep('payment')}
                     >
                       Continuar com o pagamento
-                    </ButtonFinal>
-                    <ButtonFinal type="button" onClick={() => setStep('cart')}>
+                    </S.ButtonFinal>
+                    <S.ButtonFinal
+                      type="button"
+                      onClick={() => setStep('cart')}
+                    >
                       Voltar para o carrinho
-                    </ButtonFinal>
-                  </ButtonsDiv>
+                    </S.ButtonFinal>
+                  </S.ButtonsDiv>
                 </>
               </DadosCompra>
-            </Checkout>
+            </S.Checkout>
           )}
 
           {step === 'payment' && (
-            <Payment>
+            <S.Payment>
               <>
                 <DadosPagamento valor={formataPreco(getTotalPrice())}>
                   <>
-                    <Row>
-                      <InputGroup>
+                    <S.Row>
+                      <S.InputGroup>
                         <label htmlFor="name">Nome no cartão</label>
                         <input
                           type="text"
@@ -324,18 +321,18 @@ export const Cart = () => {
                           onBlur={form.handleBlur}
                           className={checkInputHasError('name') ? 'error' : ''}
                         />
-                      </InputGroup>
-                    </Row>
-                    <Row
+                      </S.InputGroup>
+                    </S.Row>
+                    <S.Row
                       style={{
                         display: 'flex',
                         flexDirection: 'row',
                         gap: '30px'
                       }}
                     >
-                      <InputGroup>
+                      <S.InputGroup>
                         <label htmlFor="cardNum">Número do cartão</label>
-                        <input
+                        <InputMask
                           style={{ width: '228px' }}
                           type="text"
                           id="cardNum"
@@ -346,11 +343,12 @@ export const Cart = () => {
                           className={
                             checkInputHasError('cardNum') ? 'error' : ''
                           }
+                          mask="9999 9999 9999 9999"
                         />
-                      </InputGroup>
-                      <InputGroup>
+                      </S.InputGroup>
+                      <S.InputGroup>
                         <label htmlFor="code">CVV</label>
-                        <input
+                        <InputMask
                           style={{
                             width: '86px',
                             padding: '0 8px 0 0',
@@ -363,19 +361,20 @@ export const Cart = () => {
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
                           className={checkInputHasError('code') ? 'error' : ''}
+                          mask="999"
                         />
-                      </InputGroup>
-                    </Row>
-                    <Row
+                      </S.InputGroup>
+                    </S.Row>
+                    <S.Row
                       style={{
                         display: 'flex',
                         flexDirection: 'row',
                         gap: '34px'
                       }}
                     >
-                      <InputGroup>
+                      <S.InputGroup>
                         <label htmlFor="month">Mês do vencimento</label>
-                        <input
+                        <InputMask
                           type="text"
                           id="month"
                           name="month"
@@ -383,11 +382,12 @@ export const Cart = () => {
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
                           className={checkInputHasError('month') ? 'error' : ''}
+                          mask="99"
                         />
-                      </InputGroup>
-                      <InputGroup>
+                      </S.InputGroup>
+                      <S.InputGroup>
                         <label htmlFor="year">Ano do vencimento</label>
-                        <input
+                        <InputMask
                           type="text"
                           id="year"
                           name="year"
@@ -395,20 +395,21 @@ export const Cart = () => {
                           onChange={form.handleChange}
                           onBlur={form.handleBlur}
                           className={checkInputHasError('year') ? 'error' : ''}
+                          mask="99"
                         />
-                      </InputGroup>
-                    </Row>
-                    <ButtonsDiv>
-                      <ButtonFinal type="submit" disabled={isLoading}>
+                      </S.InputGroup>
+                    </S.Row>
+                    <S.ButtonsDiv>
+                      <S.ButtonFinal type="submit" disabled={isLoading}>
                         {isLoading ? 'Processando...' : 'Finalizar pagamento'}
-                      </ButtonFinal>
-                      <ButtonFinal
+                      </S.ButtonFinal>
+                      <S.ButtonFinal
                         type="button"
                         onClick={() => setStep('delivery')}
                       >
                         Voltar para a edição do endereço
-                      </ButtonFinal>
-                    </ButtonsDiv>
+                      </S.ButtonFinal>
+                    </S.ButtonsDiv>
                     {isError && (
                       <div style={{ color: 'red', marginTop: '10px' }}>
                         Ocorreu um erro ao processar seu pagamento. Por favor,
@@ -418,48 +419,49 @@ export const Cart = () => {
                   </>
                 </DadosPagamento>
               </>
-            </Payment>
+            </S.Payment>
           )}
         </form>
 
         {step === 'finish' && (
-          <Finish>
+          <S.Finish>
             <PagamentoAprovado>
               <>
                 <h1>Pedido realizado - {data.orderId} </h1>
-                <Paragrafo>
+                <S.Paragrafo>
                   Estamos felizes em informar que seu pedido já está em processo
                   de preparação e, em breve, será entregue no endereço
                   fornecido. <br />
-                </Paragrafo>
-                <Paragrafo>
+                </S.Paragrafo>
+                <S.Paragrafo>
                   Gostaríamos de ressaltar que nossos entregadores não estão
                   autorizados a realizar cobranças extras <br />
-                </Paragrafo>
-                <Paragrafo>
+                </S.Paragrafo>
+                <S.Paragrafo>
                   Lembre-se da importância de higienizar as mãos após o
                   recebimento do pedido, garantindo assim sua segurança e
                   bem-estar durante a refeição. <br />
-                </Paragrafo>
-                <Paragrafo>
+                </S.Paragrafo>
+                <S.Paragrafo>
                   Esperamos que desfrute de uma deliciosa e agradável
                   experiência gastronômica. Bom apetite! <br />
-                </Paragrafo>
-                <ButtonsDiv>
-                  <ButtonFinal
+                </S.Paragrafo>
+                <S.ButtonsDiv>
+                  <S.ButtonFinal
                     onClick={() => {
                       setStep('cart')
                       closeCart()
+                      form.resetForm()
                     }}
                   >
                     Concluir
-                  </ButtonFinal>
-                </ButtonsDiv>
+                  </S.ButtonFinal>
+                </S.ButtonsDiv>
               </>
             </PagamentoAprovado>
-          </Finish>
+          </S.Finish>
         )}
-      </SideBar>
-    </CartContainer>
+      </S.SideBar>
+    </S.CartContainer>
   )
 }
